@@ -89,7 +89,7 @@ function renderItems(item) {
 
   //redirecting to the payments page---------------------------->
   document.querySelector("#pay-btn").addEventListener("click",()=>{
-    localStorage.setItem("cart", JSON.stringify({}))
+    localStorage.setItem("cart", JSON.stringify([]))
     alert("The items were purchased")
     window.location.href="../razorpay/index.html"
   })
