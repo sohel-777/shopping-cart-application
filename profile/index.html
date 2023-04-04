@@ -13,23 +13,24 @@
           <a href="/">Shopping Cart</a>
         </div>
         <div class="nav-items">
-          <a href="/">Home Page</a>
-          <a href="/login">Cart Page</a>
+          <a href="../shop/index.html">Home Page</a>
+          <a href="../cart/index.html">Cart Page</a>
         </div>
       </nav>  
 
       <div class="formContainer">
         <h1>My Profile</h1>
         <form action="">
-          <input type="text" placeholder="First Name">
-          <input type="text" placeholder="Last Name">
-          <input type="password" placeholder="Old Password">
-          <input type="password"placeholder="Password">
-          <input type="password"placeholder="Confirm Password">
-          <button>Save Info</button>
-          <button>Logout</button>
+          <input id="firstName" type="text" placeholder="First Name">
+          <input id="lastName" type="text" placeholder="Last Name">
+          <input id="oldPassword" type="password" placeholder="Put Your Old Password To Set New Password">
+          <input id="newPassword" type="text"placeholder="New Password">
+          <input id="confirmPassword" type="password"placeholder="Confirm Password">
+          <button id="saveBtn">Save Info</button>
+          <button id="logoutBtn">Logout</button>
         </form>
       </div>
+      <script src="./script.js"></script>
 </body>
 </html>
 

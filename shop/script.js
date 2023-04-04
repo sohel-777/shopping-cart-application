@@ -23,13 +23,16 @@ const vHighPrice=document.querySelector("#vHigh")
 
 
 
-let men = []; //mens array---------------------------------------------------------------------------------->
-let women = []; //women's array----------------------------------------------------------------------------->
-let jewelery = []; //jewellery array------------------------------------------------------------------------>
-let electronics = []; //electronics array------------------------------------------------------------------->
-let response = []; //main array----------------------------------------------------------------------------->
-let myCartArray = []; //cart array-------------------------------------------------------------------------->
-
+let men = []; 
+let women = []; 
+let jewelery = [];
+let electronics = []; 
+let response = [];
+let myCartArray = []; 
+let temp=JSON.parse(localStorage.getItem("cart"))
+if(temp){
+  myCartArray=temp
+}
 //fetching api---------------------------------------------------------------------------------------------->
 fetchAPI("https://fakestoreapi.com/products");
 async function fetchAPI(url) {
@@ -70,7 +73,7 @@ function addToCart(itemId) {
   let temp = response.filter((item) => {
     return item.id == itemId;
   });
-  console.log(typeof temp);
+  
   myCartArray.push(temp[0]);
   localStorage.setItem("cart", JSON.stringify(myCartArray));
 }
@@ -240,10 +243,14 @@ console.log(searchResults)
 
 //render function------------------------------------------------------------------------------------------->
 function renderItems(item) {
+   //  <div class="title">${item.title}</div>  after div class info
   return `
  <div class="item">
+ <div id="img-div">
  <img src=${item.image} alt="Item" />
-   <div class="info">
+ </div>
+   <div class="info" id="info-div">
+   <div class="title">${item.title.slice(0,42)}...</div>
    <div class="row">
      <div class="price">$${item.price}</div>
      <div class="sized">S,M,L</div>
@@ -258,10 +265,13 @@ function renderItems(item) {
    </div>
    <div class="row">Rating: ${item.rating.rate}⭐</div>
  </div>
+  <div id="btn-div">
  <button id="addBtn" onclick="addToCart(${item.id})">Add to Cart</button>
+ </div>
 </div>`;
 }
 
+//function for the range bar--------------------------------------->
 rangeBar.addEventListener("input", applyRatingFilter)
 function applyRatingFilter(){
   const ratingValue = rangeBar.value
@@ -274,6 +284,7 @@ function applyRatingFilter(){
   searchSection.classList.remove("hide-class");
 }
 
+//function for  filtering according ti price--------------------------------->
 applyBtn.addEventListener("click",filterPrice)
 function filterPrice(){
   let resultsArr=[]
@@ -282,35 +293,54 @@ function filterPrice(){
     let temp=response.filter((item)=>{
       return item.price<=25.0
     })
-    resultsArr.push(temp)
+    
+   temp.forEach((item)=>{
+    resultsArr.push(item)
+   })
    
   }
-  
-  
-  //   if(midPrice.checked==true){
+  if(midPrice.checked==true){
     
-  //     let temp=response.filter((item)=>{
-  //       return item.price<=25.0
-  //     })
-  //     resultsArr.push(temp)
-  // }
-  //     if(highPrice.checked==true){
+    let temp=response.filter((item)=>{
+      return item.price>=25.0 && item.price<=50.0
+    })
     
-  //       let temp=response.filter((item)=>{
-  //         return item.price<=25.0
-  //       })
-  //       resultsArr.push(temp)
-  //     }
-  //       if(vHighPrice.checked==true){
+   temp.forEach((item)=>{
+    resultsArr.push(item)
+   })
+   
+  }
+  if(highPrice.checked==true){
     
-  //         let temp=response.filter((item)=>{
-  //           return item.price<=25.0
-  //         })
-  //         resultsArr.push(temp)
-  //       }
-  const searchHTML = resultsArr[0].map((item) => renderItems(item));
+    let temp=response.filter((item)=>{
+      return item.price>=50.0 && item.price<=100.0
+    })
+    
+   temp.forEach((item)=>{
+    resultsArr.push(item)
+   })
+   
+  }
+  if(vHighPrice.checked==true){
+    
+    let temp=response.filter((item)=>{
+      return item.price>=100.0
+    })
+    
+   temp.forEach((item)=>{
+    resultsArr.push(item)
+   })
+   
+  }
+ 
+  const searchHTML = resultsArr.map((item) => renderItems(item));
   document.getElementById("searched-items").innerHTML = searchHTML.join("");
   searchSection.classList.remove("hide-class");
+  
+  if(lowPrice.checked==false && midPrice.checked==false && highPrice.checked==false && vHighPrice.checked==false){
+    document.getElementById("searched-items").innerHTML =""
+    searchSection.classList.add("hide-class");
 
+  }
   }
       

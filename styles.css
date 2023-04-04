@@ -4,7 +4,7 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  overflow-x: hidden;
+  /* overflow-x: auto; */
 }
 
 main{
@@ -62,12 +62,22 @@ main-content {
   
   main-content  .item {
     border: 1px solid black;
-    /* width: 83%; */
-   
+    width: 15rem;
+   height: 23rem;
   }
-  
+  #img-div{
+    height: 50%;
+  }
+  #info-div{
+    height: 40%;
+  }
+  #btn-div{
+    height: 10%;
+  }
   main-content  .item img {
     max-width: 100%;
+    width: 100%;
+    height: 100%;
   }
   
   main-content  .item .row {
@@ -81,6 +91,7 @@ main-content {
   
   main-content .item button {
     width: 100%;
+    height: 100%;
     border-radius: none;
     border: none;
     padding: 1rem;
@@ -120,7 +131,7 @@ main-content {
 }
 
 #img2{
-    height: 600px;
-    width: 1000px;
+    height: 24rem;
+    width: 50rem;
 }
 
