@@ -231,7 +231,9 @@ function searchItems() {
   
 console.log(searchResults)
 
+
   if (searchTerm !== "") {
+   
     const searchHTML = searchResults.map((item) => renderItems(item));
     document.getElementById("searched-items").innerHTML = searchHTML.join("");
     searchSection.classList.remove("hide-class");
@@ -239,6 +241,10 @@ console.log(searchResults)
     document.getElementById("searched-items").innerHTML = "No items found";
     // document.getElementById("searched-section").classList.add("hide-class");
   }
+  if(searchResults.length==0){
+    document.getElementById("searched-items").innerHTML = "No items found";
+  
+    }
 }
 
 //render function------------------------------------------------------------------------------------------->

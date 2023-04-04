@@ -9,7 +9,7 @@ function validateEmail(email) {
 
     return regex.test(email);
 }
-
+let flag=true
 function signup(e) {
     e.preventDefault();
     //taking the values
@@ -31,20 +31,29 @@ function signup(e) {
         if (!validateEmail(email)) {
             alert("invalid email");
         } else {
-            let details = {
-                id: user.length,
-                firstName: document.getElementById("firstName").value,
-                lastName: document.getElementById("lastName").value,
-                email: document.getElementById("email").value,
-                password: document.getElementById("password").value,
-                confirmPassword: document.getElementById("confirmPassword").value,
-            };
-            user.push(details);
-
-            // console.log("raaam");
-            localStorage.setItem("user", JSON.stringify(user));
-            console.log(user);
-            alert("signup successful");
+            for (var i = 0; i < user.length; i++) {
+                if (user[i].email === email) {
+                  alert('Email already in use.');
+                  return;
+                }
+              }
+           
+                let details = {
+                    id: user.length,
+                    firstName: document.getElementById("firstName").value,
+                    lastName: document.getElementById("lastName").value,
+                    email: document.getElementById("email").value,
+                    password: document.getElementById("password").value,
+                    confirmPassword: document.getElementById("confirmPassword").value,
+                };
+                user.push(details);
+    
+                // console.log("raaam");
+                localStorage.setItem("user", JSON.stringify(user));
+                console.log(user);
+                alert("signup successful");
+            
+            
         }
     }
 }
